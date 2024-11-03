@@ -3,7 +3,7 @@
 import os
 import tkinter as tk
 from tkinter import messagebox
-from modules import info, specs, battery_test, user_test, report, notes_supp #, hardware_test
+from modules import info, specs, battery_test, user_test, report, notes_supp, hardware_test
 from modules.user_test import user_test
 
 os.system('cls' if os.name == 'nt' else 'clear')
@@ -35,9 +35,9 @@ def run_battery_test():
     battery_test.check_battery_status(OUTPUT_FILE)
     messagebox.showinfo("Batterie", "État de la batterie collecté.")
 
-# def run_hardware_test():
-#     results = hardware_test.run_tests(OUTPUT_FILE, OUTPUT_DIR)
-#     messagebox.showinfo("Tests matériels", f"Résultats matériels : {results}")
+def run_hardware_test():
+    results = hardware_test.run_tests(OUTPUT_FILE, OUTPUT_DIR)
+    messagebox.showinfo("Tests matériels", f"Résultats matériels : {results}")
 
 def run_user_test():
     user_test(OUTPUT_FILE)
@@ -69,7 +69,7 @@ root.geometry("400x400")
 tk.Button(root, text="Prendre les informations système", command=run_info_test).pack(pady=5)
 tk.Button(root, text="Collecter les spécifications système", command=run_specs_test).pack(pady=5)
 tk.Button(root, text="Consulter l'état de la batterie", command=run_battery_test).pack(pady=5)
-# tk.Button(root, text="Tester les composants matériels", command=lambda: run_hardware_test()).pack(pady=5)
+tk.Button(root, text="Tester les composants matériels", command=lambda: run_hardware_test()).pack(pady=5)
 tk.Button(root, text="Consulter ou rapporter d'autres pannes", command=run_user_test).pack(pady=5)
 tk.Button(root, text="Ajouter des notes supplémentaires", command=run_notes_supp).pack(pady=5)
 tk.Button(root, text="Générer le rapport PDF", command=lambda: generate_report(serial_number)).pack(pady=5)
