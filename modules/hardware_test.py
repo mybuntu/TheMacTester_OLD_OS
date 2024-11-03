@@ -5,6 +5,7 @@ import sounddevice as sd
 import numpy as np
 import wavio
 import tkinter as tk
+import subprocess
 
 RECORD_SECONDS = 2
 SAMPLE_RATE = 44100
@@ -21,7 +22,15 @@ def ask_confirmation(component):
         print("Réponse invalide, par défaut 'Oui' enregistré.")
         return "Fonctionnel"
 
-# Test des composants
+def ask_confirmation(component):
+    response = input(f"Est-ce que {component} fonctionne ? O/n : ").strip()
+    if response == '' or response.lower() == 'o':
+        return "Fonctionnel"
+    elif response.lower() == 'n':
+        return "Défectueux"
+    else:
+        print("Réponse invalide, par défaut 'Oui' enregistré.")
+        return "Fonctionnel"
 
 def test_microphone(output_dir):
     print("Enregistrement audio...")
@@ -57,10 +66,8 @@ def test_speakers():
     test_results["Haut-parleurs (stéréo)"] = ask_confirmation("les deux haut-parleurs")
 
 def run_tests(output_file, output_dir):
-    # test_screen()
     test_speakers()
     test_microphone(output_dir)
-    # test_camera()
 
     # Enregistrer les résultats dans le fichier spécifié
     with open(output_file, 'a', encoding='utf-8') as file:
