@@ -1,5 +1,5 @@
 # The GUIless Mac Tester
-## by Jules David
+## Jules David
 import os
 import sounddevice as sd
 import numpy as np
